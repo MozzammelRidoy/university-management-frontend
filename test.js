@@ -1,7 +1,7 @@
 const adminPaths2 = [
   {
     name: "Dashboard",
-    path: "/admin/dashboard",
+    path: "dashboard",
     element: "<AdminDashboard />",
   },
   {
@@ -9,17 +9,17 @@ const adminPaths2 = [
     children: [
       {
         name: "Create Admin",
-        path: "/admin/create-admin",
+        path: "create-admin",
         element: "<CreateAdmin />",
       },
       {
         name: "Create Faculty",
-        path: "/admin/create-faculty",
+        path: "create-faculty",
         element: "<CreateFaculty />",
       },
       {
         name: "Create Student",
-        path: "/admin/create-student",
+        path: "create-student",
         element: "<CreateStudent />",
       },
     ],
@@ -29,7 +29,7 @@ const adminPaths2 = [
     children: [
       {
         name: "Offered Coures",
-        path: "/admin/offered-course",
+        path: "offered-course",
         element: "<CreateAdmin />",
       },
     ],
@@ -37,12 +37,33 @@ const adminPaths2 = [
 ];
 
 const newArray = adminPaths2.reduce((acc, item) => {
-  acc.push(item);
+  if (item.path && item.element) {
+    acc.push({
+      path: item.path,
+      element: item.element,
+    });
+  }
+
+  if (item.children) {
+    item.children.forEach((child) => {
+      acc.push({
+        path: child.path,
+        element: child.element,
+      });
+    });
+  }
 
   return acc;
 }, []);
 
 console.log(newArray);
+// const newArray = adminPaths2.reduce((acc, item) => {
+//   acc.push(item);
+
+//   return acc;
+// }, []);
+
+// console.log(newArray);
 
 // const arr = [1, 2, 3, 4, 5];
 
