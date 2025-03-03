@@ -2,6 +2,7 @@ import { Layout, Menu, MenuProps } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 
 import Sider from "antd/es/layout/Sider";
+import { Outlet } from "react-router-dom";
 
 const items: MenuProps["items"] = [
   {
@@ -74,7 +75,7 @@ const MainLayout = () => {
               minHeight: 360,
             }}
           >
-            <h2>The main containt should be here.</h2>
+            <Outlet />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
