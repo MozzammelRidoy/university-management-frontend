@@ -1,9 +1,7 @@
-import React from "react";
-
 const CreateStudent = () => {
   return (
     <div>
-      <h2>This is Create Student page</h2>
+      <h2>Create Student</h2>
     </div>
   );
 };
