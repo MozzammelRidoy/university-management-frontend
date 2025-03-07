@@ -26,7 +26,6 @@ const PHForm = ({ onSubmit, children, defaultValues }: TFromPops) => {
       <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
         {children}
       </Form>
-      ;
     </FormProvider>
   );
 };
