@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import { FieldValues, useForm } from "react-hook-form";
+import { Button, Row } from "antd";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
@@ -27,31 +27,26 @@ const Login = () => {
 
     console.log(data);
 
-    // try {
-    //   const userInfo = {
-    //     id: data.id,
-    //     password: data.password,
-    //   };
-    //   const res = await login(userInfo).unwrap();
-    //   const user = verifyToken(res.data.accessToken) as TUser;
-    //   dispatch(setUser({ user, token: res.data.accessToken }));
-    //   navigate(`/${user.role}/dashboard`);
-    //   toast.success("Logged in successfully!", { id: toastId, duration: 1000 });
-    // } catch (err) {
-    //   toast.error("Something went wrong!", { id: toastId, duration: 1000 });
-    // }
+    try {
+      const userInfo = {
+        id: data.id,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.accessToken) as TUser;
+      dispatch(setUser({ user, token: res.data.accessToken }));
+      navigate(`/${user.role}/dashboard`);
+      toast.success("Logged in successfully!", { id: toastId, duration: 1000 });
+    } catch (err) {
+      toast.error("Something went wrong!", { id: toastId, duration: 1000 });
+    }
   };
   return (
-    <div>
-      <h2>Login here</h2>
-
+    <Row justify={"center"} align={"middle"} style={{ height: "100vh" }}>
       <PHForm onSubmit={onSubmit}>
-        <div>
-          <PHInput type={"text"} name={"id"} label={"ID :"} />
-        </div>
-        <div>
-          <PHInput type={"text"} name={"password"} label={"Password :"} />
-        </div>
+        <PHInput type={"text"} name={"id"} label={"ID :"} />
+
+        <PHInput type={"text"} name={"password"} label={"Password :"} />
 
         <Button htmlType="submit">Login</Button>
       </PHForm>
@@ -67,7 +62,7 @@ const Login = () => {
 
         <Button htmlType="submit">Login</Button>
       </PHForm> */}
-    </div>
+    </Row>
   );
 };
 
