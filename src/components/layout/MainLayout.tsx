@@ -10,7 +10,7 @@ const MainLayout = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout>
       <Sidebar />
       <Layout>
         <Header style={{ padding: 0 }}>
