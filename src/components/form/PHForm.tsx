@@ -9,16 +9,20 @@ import {
 
 type TFromConfig = {
   defaultValues?: Record<string, any>;
+  resolver?: any;
 };
 type TFromPops = {
   onSubmit: SubmitHandler<FieldValues>;
   children: ReactNode;
 } & TFromConfig;
 
-const PHForm = ({ onSubmit, children, defaultValues }: TFromPops) => {
+const PHForm = ({ onSubmit, children, defaultValues, resolver }: TFromPops) => {
   const formConfig: TFromConfig = {};
   if (defaultValues) {
     formConfig["defaultValues"] = defaultValues;
+  }
+  if (resolver) {
+    formConfig["resolver"] = resolver;
   }
   const methods = useForm(formConfig);
   return (
