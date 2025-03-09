@@ -30,8 +30,6 @@ const Login = () => {
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in...");
 
-    console.log(data);
-
     try {
       const userInfo = {
         id: data.id,
