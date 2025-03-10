@@ -4,6 +4,7 @@ import PHInput from "../../../components/form/PHInput";
 import { Button, Col, Divider, Row } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constant/global";
+import PHDatePicker from "../../../components/form/PHDatePicker";
 
 const studentDummyData = {
   password: "student123",
@@ -42,6 +43,40 @@ const studentDummyData = {
   },
 };
 
+// this is only for development.
+// should be removed
+const studentDefaultValues = {
+  name: {
+    firstName: "Torun",
+    middleName: "Michael",
+    lastName: "Zoe",
+  },
+  gender: "male",
+  bloodGroup: "O+",
+
+  email: "student3@email.com",
+  contactNo: "+1234567890",
+  emergencyContactNo: "+0987654321",
+  presentAddress: "123 Main Street, City, Country",
+  permanentAddress: "456 Elm Street, City, Country",
+
+  guardian: {
+    fatherName: "Robert Doe",
+    fatherOccupation: "Engineer",
+    fatherContactNo: "+1234000011",
+    motherName: "Jane Doe",
+    motherOccupation: "Teacher",
+    motherContactNo: "+1234000022",
+  },
+  localGuardian: {
+    name: "Uncle Sam",
+    occupation: "Doctor",
+    contactNo: "+1234000033",
+    address: "block c panthapath dahak",
+  },
+  addmissionSemester: "678b8545e47a30c4be209a4b",
+  academicDepartment: "678b83a3b665320bc45e746e",
+};
 const CreateStudent = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
@@ -59,7 +94,7 @@ const CreateStudent = () => {
   return (
     <Row>
       <Col span={24}>
-        <PHForm onSubmit={onSubmit}>
+        <PHForm onSubmit={onSubmit} defaultValues={studentDefaultValues}>
           {/* Student Personal Information  */}
           <Divider>Personal Info.</Divider>
           <Row gutter={8}>
@@ -76,7 +111,7 @@ const CreateStudent = () => {
               <PHSelect name="gender" options={genderOptions} label="Gender" />
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-              <PHInput name="dateOfBirth" type="text" label="Date of Birth" />
+              <PHDatePicker name="dateOfBirth" label="Date of Birth" />
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <PHSelect
