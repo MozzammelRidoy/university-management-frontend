@@ -11,6 +11,7 @@ import {
 } from "../../../redux/features/admin/academicManagement_Api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createStudentZodSchema } from "../../../validationSchema/userManagement_validationZodSchema";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement_Api";
 
 const studentDummyData = {
   password: "student123",
@@ -103,11 +104,19 @@ const CreateStudent = () => {
     label: `${item.name}`,
   }));
 
+  const [addStudent, { data, error }] = useAddStudentMutation();
+
+  console.log(data, error);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
 
-    const formData = new FormData();
+    const studentData = {
+      password: "student123",
+      student: data,
+    };
 
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(studentData));
     // formData.append("something", "data of something");
     // formData.append("data", JSON.stringify(data));
 
@@ -115,6 +124,8 @@ const CreateStudent = () => {
     // console.log(formData.get("something"));
     // console.log([...formData.entries()]);
     // console.log(Object.fromEntries(formData));
+
+    addStudent(formData);
   };
   return (
     <Row>
