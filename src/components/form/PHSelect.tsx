@@ -5,7 +5,7 @@ type TSelectFormProps = {
   label: string;
   name: string;
   disabled?: boolean;
-  options: { value: string; label: string; disabled?: boolean }[];
+  options: { value: string; label: string; disabled?: boolean }[] | undefined;
 };
 const PHSelect = ({
   label,

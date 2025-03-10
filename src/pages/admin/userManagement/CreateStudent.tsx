@@ -5,7 +5,12 @@ import { Button, Col, Divider, Row } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constant/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
-import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement_Api";
+import {
+  useGetAllDepartmentsQuery,
+  useGetAllSemestersQuery,
+} from "../../../redux/features/admin/academicManagement_Api";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createStudentZodSchema } from "../../../validationSchema/userManagement_validationZodSchema";
 
 const studentDummyData = {
   password: "student123",
@@ -75,16 +80,27 @@ const studentDefaultValues = {
     contactNo: "+1234000033",
     address: "block c panthapath dahak",
   },
-
-  academicDepartment: "678b83a3b665320bc45e746e",
+  // addmissionSemester: "678b8545e47a30c4be209a4b",
+  // academicDepartment: "678b83a3b665320bc45e746e",
 };
 const CreateStudent = () => {
   const { data: semesterData, isLoading: semesterIsLoading } =
     useGetAllSemestersQuery(undefined);
 
+  // const { data: departmentData, isLoading: departmentIsLoading } =
+  //   useGetAllDepartmentsQuery(undefined, { skip: semesterIsLoading });
+
+  const { data: departmentData, isLoading: departmentIsLoading } =
+    useGetAllDepartmentsQuery(undefined, { skip: semesterIsLoading });
+
   const semestersOptions = semesterData?.data?.map((item) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
+  }));
+
+  const departmentOptions = departmentData?.data?.map((item) => ({
+    value: item._id,
+    label: `${item.name}`,
   }));
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -103,7 +119,11 @@ const CreateStudent = () => {
   return (
     <Row>
       <Col span={24}>
-        <PHForm onSubmit={onSubmit} defaultValues={studentDefaultValues}>
+        <PHForm
+          onSubmit={onSubmit}
+          resolver={zodResolver(createStudentZodSchema)}
+          defaultValues={studentDefaultValues}
+        >
           {/* Student Personal Information  */}
           <Divider>Personal Info.</Divider>
           <Row gutter={8}>
@@ -233,14 +253,15 @@ const CreateStudent = () => {
               <PHSelect
                 disabled={semesterIsLoading}
                 name="addmissionSemester"
-                options={semestersOptions!}
+                options={semestersOptions}
                 label="Addmission Semester"
               />
             </Col>
             <Col span={24} md={{ span: 12 }}>
-              <PHInput
+              <PHSelect
                 name="academicDepartment"
-                type="text"
+                options={departmentOptions}
+                disabled={departmentIsLoading}
                 label="Academic Department"
               />
             </Col>
