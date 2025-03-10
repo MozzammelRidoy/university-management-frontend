@@ -25,9 +25,14 @@ const PHForm = ({ onSubmit, children, defaultValues, resolver }: TFromPops) => {
     formConfig["resolver"] = resolver;
   }
   const methods = useForm(formConfig);
+
+  const submitWithReset: SubmitHandler<FieldValues> = (data) => {
+    onSubmit(data);
+    methods.reset();
+  };
   return (
     <FormProvider {...methods}>
-      <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
+      <Form layout="vertical" onFinish={methods.handleSubmit(submitWithReset)}>
         {children}
       </Form>
     </FormProvider>
