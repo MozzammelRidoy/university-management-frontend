@@ -15,6 +15,7 @@ export const createStudentZodSchema = z.object({
   bloodGroup: z.enum(["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"], {
     errorMap: () => ({ message: "Invalid blood group" }),
   }),
+  image: z.any(),
 
   email: z.string().email("Invalid email format"),
   contactNo: z.string().min(10, "Contact number must be at least 10 digits"),
