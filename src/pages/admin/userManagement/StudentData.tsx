@@ -6,11 +6,14 @@ import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManage
 export type TTableData = Pick<TStudentData, "name" | "id">;
 
 const StudentData = () => {
-  const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
-  // [
-  //   { name: "year", value: "2025" },
-  // ]
-  const { data: studentData, isFetching } = useGetAllStudentsQuery(params);
+  const [params, setParams] = useState<TQueryParams[]>([]);
+  const [page, setPage] = useState(3);
+  const { data: studentData, isFetching } = useGetAllStudentsQuery([
+    { name: "limit", value: 3 },
+    { name: "page", value: page },
+    { name: "sort", value: "id" },
+    ...params,
+  ]);
 
   const tableData = studentData?.data?.map(({ _id, name, id }) => ({
     key: _id,
