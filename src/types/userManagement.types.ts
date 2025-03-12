@@ -43,7 +43,7 @@ export type TUser = {
 
 export type TName = {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
 };
 
@@ -61,4 +61,22 @@ export type TLocalGuardian = {
   occupation: string;
   contactNo: string;
   address?: string;
+};
+
+export type TAdmin = {
+  password?: string;
+  admin: TAdmin;
+};
+
+export type TAdminData = {
+  designation: string;
+  name: TName;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloogGroup: string;
+  presentAddress: string;
+  permanentAddress: string;
 };

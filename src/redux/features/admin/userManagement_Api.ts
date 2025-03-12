@@ -1,9 +1,15 @@
-import { TQueryParams, TResponseRedux, TStudentData } from "../../../types";
+import {
+  TAdmin,
+  TAdminData,
+  TQueryParams,
+  TResponseRedux,
+  TStudentData,
+} from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // acadmic semesters
+    // for Student
     getAllStudents: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -49,66 +55,52 @@ const userManagementApi = baseApi.injectEndpoints({
         body: formData,
       }),
     }),
+    // for Admin
+    getAllAdmins: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
 
-    // // academic faculties.
-    // getAllFaculties: builder.query({
-    //   query: (args) => {
-    //     const params = new URLSearchParams();
-
-    //     // params.append(args[0].name, args[0].value);
-    //     if (args) {
-    //       args.forEach((item: TQueryParams) => {
-    //         params.append(item.name, item.value as string);
-    //       });
-    //     }
-    //     return {
-    //       url: "/academic-faculties",
-    //       method: "GET",
-    //       params,
-    //     };
-    //   },
-    //   transformResponse: (response: TResponseRedux<TAcademicFaculty[]>) => {
-    //     return { data: response?.data, meta: response?.meta };
-    //   },
-    // }),
-
-    // addAcademicFaculty: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/academic-faculties/create-academic-faculty",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
-
-    // // academic departments
-    // getAllDepartments: builder.query({
-    //   query: (args) => {
-    //     const params = new URLSearchParams();
-
-    //     // params.append(args[0].name, args[0].value);
-    //     if (args) {
-    //       args.forEach((item: TQueryParams) => {
-    //         params.append(item.name, item.value as string);
-    //       });
-    //     }
-    //     return {
-    //       url: "/academic-departments",
-    //       method: "GET",
-    //       params,
-    //     };
-    //   },
-    //   transformResponse: (response: TResponseRedux<TAcademicDepartment[]>) => {
-    //     return { data: response?.data, meta: response?.meta };
-    //   },
-    // }),
-
-    // addAcademicDepartment: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/academic-departments/create-academic-department",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
+        // params.append(args[0].name, args[0].value);
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/admins",
+          method: "GET",
+          params,
+        };
+      },
+      transformResponse: (response: TResponseRedux<TAdminData[]>) => {
+        return { data: response?.data, meta: response?.meta };
+      },
+    }),
+    getSingleAdmin: builder.query({
+      query: (adminId) => {
+        return {
+          url: `/admins/${adminId}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: TResponseRedux<TAdminData>) => {
+        return { data: response?.data };
+      },
+    }),
+    addAdmin: builder.mutation({
+      query: (data) => ({
+        url: "/users/create-admin",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updateAdminDetails: builder.mutation({
+      query: ({ adminId, formData }) => ({
+        url: `/admins/${adminId}`,
+        method: "PATCH",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -117,4 +109,8 @@ export const {
   useGetAllStudentsQuery,
   useGetSingleStudentQuery,
   useUpdateStudentDetailsMutation,
+  useGetAllAdminsQuery,
+  useGetSingleAdminQuery,
+  useAddAdminMutation,
+  useUpdateAdminDetailsMutation,
 } = userManagementApi;
