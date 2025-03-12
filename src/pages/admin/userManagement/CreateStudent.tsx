@@ -13,42 +13,42 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createStudentZodSchema } from "../../../validationSchema/userManagement_validationZodSchema";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement_Api";
 
-const studentDummyData = {
-  password: "student123",
-  student: {
-    name: {
-      firstName: "Torun",
-      middleName: "Michael",
-      lastName: "Zoe",
-    },
-    gender: "male",
-    dateOfBirth: "2000-05-15",
-    bloodGroup: "O+",
+// const studentDummyData = {
+//   password: "student123",
+//   student: {
+//     name: {
+//       firstName: "Torun",
+//       middleName: "Michael",
+//       lastName: "Zoe",
+//     },
+//     gender: "male",
+//     dateOfBirth: "2000-05-15",
+//     bloodGroup: "O+",
 
-    email: "student3@email.com",
-    contactNo: "+1234567890",
-    emergencyContactNo: "+0987654321",
-    presentAddress: "123 Main Street, City, Country",
-    permanentAddress: "456 Elm Street, City, Country",
+//     email: "student3@email.com",
+//     contactNo: "+1234567890",
+//     emergencyContactNo: "+0987654321",
+//     presentAddress: "123 Main Street, City, Country",
+//     permanentAddress: "456 Elm Street, City, Country",
 
-    guardian: {
-      fatherName: "Robert Doe",
-      fatherOccupation: "Engineer",
-      fatherContactNo: "+1234000011",
-      motherName: "Jane Doe",
-      motherOccupation: "Teacher",
-      motherContactNo: "+1234000022",
-    },
-    localGuardian: {
-      name: "Uncle Sam",
-      occupation: "Doctor",
-      contactNo: "+1234000033",
-      address: "block c panthapath dahak",
-    },
-    addmissionSemester: "678b8545e47a30c4be209a4b",
-    academicDepartment: "678b83a3b665320bc45e746e",
-  },
-};
+//     guardian: {
+//       fatherName: "Robert Doe",
+//       fatherOccupation: "Engineer",
+//       fatherContactNo: "+1234000011",
+//       motherName: "Jane Doe",
+//       motherOccupation: "Teacher",
+//       motherContactNo: "+1234000022",
+//     },
+//     localGuardian: {
+//       name: "Uncle Sam",
+//       occupation: "Doctor",
+//       contactNo: "+1234000033",
+//       address: "block c panthapath dahak",
+//     },
+//     addmissionSemester: "678b8545e47a30c4be209a4b",
+//     academicDepartment: "678b83a3b665320bc45e746e",
+//   },
+// };
 
 // this is only for development.
 // should be removed

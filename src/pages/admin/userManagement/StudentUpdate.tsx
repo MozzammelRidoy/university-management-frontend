@@ -29,8 +29,7 @@ const StudentUpdate: React.FC = () => {
   const { data: studentDetails, isLoading: studentLoading } =
     useGetSingleStudentQuery(studentId);
 
-  const [updateStudentDetails, { data: studentupdateData }] =
-    useUpdateStudentDetailsMutation();
+  const [updateStudentDetails] = useUpdateStudentDetailsMutation();
 
   // Fetch All Semesters (Skip until student is loaded)
   const { data: semesterData, isLoading: semesterLoading } =
@@ -52,7 +51,7 @@ const StudentUpdate: React.FC = () => {
   }));
 
   // Handle form submission
-  const onSubmit: SubmitHandler<FieldValues> = (stuData) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (stuData) => {
     if (!studentId) {
       console.error("No student ID provided");
       return;
@@ -69,22 +68,19 @@ const StudentUpdate: React.FC = () => {
       formData.append("file", stuData.image);
     }
 
+    const toasId = toast.loading("Updating...");
     // Pass studentId along with formData to RTK query
-    updateStudentDetails({ studentId, formData });
-    if (studentupdateData?.success) {
-      toast.success(
-        studentupdateData?.message || "Student details updated success",
-        {
-          duration: 1000,
-        }
-      );
+    const res = await updateStudentDetails({ studentId, formData });
+    if (res?.data?.success) {
+      toast.success(res?.data?.message || "Student details updated success", {
+        id: toasId,
+        duration: 1000,
+      });
     } else {
-      toast.error(
-        studentupdateData?.message || "Student details updating failed!",
-        {
-          duration: 1000,
-        }
-      );
+      toast.error(res?.data?.message || "Student details updating failed!", {
+        id: toasId,
+        duration: 1000,
+      });
     }
   };
 
@@ -127,7 +123,7 @@ const StudentUpdate: React.FC = () => {
     },
     addmissionSemester: studentDetails?.data?.addmissionSemester?._id || "",
     academicDepartment: studentDetails?.data?.academicDepartment?._id || "",
-    image: "",
+    image: null,
   };
 
   return (
@@ -166,13 +162,13 @@ const StudentUpdate: React.FC = () => {
             <Col xs={24} md={12} lg={8}>
               <Controller
                 name="image"
-                render={({ field: { onChange, value, ...rest } }) => (
-                  <Form.Item label="Profile Image">
+                render={({ field: { onChange, value, ...field } }) => (
+                  <Form.Item label="Picture">
                     <Input
                       type="file"
-                      value={value}
+                      {...field}
+                      value={value?.fileName}
                       onChange={(e) => onChange(e.target.files?.[0])}
-                      {...rest}
                     />
                   </Form.Item>
                 )}
