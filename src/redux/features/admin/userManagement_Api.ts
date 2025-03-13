@@ -1,5 +1,6 @@
 import {
   TAdminData,
+  TFacultyData,
   TQueryParams,
   TResponseRedux,
   TStudentData,
@@ -100,6 +101,52 @@ const userManagementApi = baseApi.injectEndpoints({
         body: formData,
       }),
     }),
+    // for Faculty
+    getAllFaculties: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        // params.append(args[0].name, args[0].value);
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/faculties",
+          method: "GET",
+          params,
+        };
+      },
+      transformResponse: (response: TResponseRedux<TFacultyData[]>) => {
+        return { data: response?.data, meta: response?.meta };
+      },
+    }),
+    getSingleFaculty: builder.query({
+      query: (facultyId) => {
+        return {
+          url: `/faculties/${facultyId}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: TResponseRedux<TFacultyData>) => {
+        return { data: response?.data };
+      },
+    }),
+    addFaculty: builder.mutation({
+      query: (data) => ({
+        url: "/users/create-faculty",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updateFacultyDetails: builder.mutation({
+      query: ({ facultyId, formData }) => ({
+        url: `/faculties/${facultyId}`,
+        method: "PATCH",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -112,4 +159,8 @@ export const {
   useGetSingleAdminQuery,
   useAddAdminMutation,
   useUpdateAdminDetailsMutation,
+  useGetAllFacultiesQuery,
+  useGetSingleFacultyQuery,
+  useAddFacultyMutation,
+  useUpdateFacultyDetailsMutation,
 } = userManagementApi;
