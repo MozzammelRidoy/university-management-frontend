@@ -120,77 +120,77 @@ export default StudentDetails;
 //   }
 
 //   return (
-//     <div>
-//       <Row justify="center">
-//         <Col span={24}>
-//           <Card
-//             title="Student Profile"
-//             style={{
-//               width: "100%",
-//               borderRadius: "10px",
-//               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-//             }}
-//           >
-//             <div style={{ textAlign: "center", marginBottom: "20px" }}>
-//               <Avatar size={120} src={student?.profileImage} />
-//               <h2 style={{ marginTop: "10px" }}>
-//                 {student?.name?.firstName} {student?.name?.middleName}{" "}
-//                 {student?.name?.lastName}
-//               </h2>
-//               <p style={{ fontSize: "16px", color: "gray" }}>
-//                 {student?.academicFaculty?.name}
-//               </p>
-//             </div>
+// <div>
+//   <Row justify="center">
+//     <Col span={24}>
+//       <Card
+//         title="Student Profile"
+//         style={{
+//           width: "100%",
+//           borderRadius: "10px",
+//           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+//         }}
+//       >
+//         <div style={{ textAlign: "center", marginBottom: "20px" }}>
+//           <Avatar size={120} src={student?.profileImage} />
+//           <h2 style={{ marginTop: "10px" }}>
+//             {student?.name?.firstName} {student?.name?.middleName}{" "}
+//             {student?.name?.lastName}
+//           </h2>
+//           <p style={{ fontSize: "16px", color: "gray" }}>
+//             {student?.academicFaculty?.name}
+//           </p>
+//         </div>
 
-//             <Descriptions bordered column={{ xs: 1, sm: 1, md: 2 }}>
-//               <Descriptions.Item label="Student ID">
-//                 {student?.id}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Email">
-//                 {student?.email}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Gender">
-//                 {student?.gender}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Date of Birth">
-//                 {student?.dateOfBirth}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Contact No">
-//                 {student?.contactNo}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Blood Group">
-//                 {student?.bloodGroup}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Present Address">
-//                 {student?.presentAddress}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Permanent Address">
-//                 {student?.permanentAddress}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Guardian">
-//                 Father: {student?.guardian?.fatherName} (
-//                 {student?.guardian?.fatherOccupation}) -{" "}
-//                 {student?.guardian?.fatherContactNo} <br />
-//                 Mother: {student?.guardian?.motherName} (
-//                 {student?.guardian?.motherOccupation}) -{" "}
-//                 {student?.guardian?.motherContactNo}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Local Guardian">
-//                 {student?.localGuardian?.name} (
-//                 {student?.localGuardian?.occupation}) -{" "}
-//                 {student?.localGuardian?.contactNo}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Department">
-//                 {student?.academicDepartment?.name}
-//               </Descriptions.Item>
-//               <Descriptions.Item label="Faculty">
-//                 {student?.academicFaculty?.name}
-//               </Descriptions.Item>
-//             </Descriptions>
-//           </Card>
-//         </Col>
-//       </Row>
-//     </div>
+//         <Descriptions bordered column={{ xs: 1, sm: 1, md: 2 }}>
+//           <Descriptions.Item label="Student ID">
+//             {student?.id}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Email">
+//             {student?.email}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Gender">
+//             {student?.gender}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Date of Birth">
+//             {student?.dateOfBirth}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Contact No">
+//             {student?.contactNo}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Blood Group">
+//             {student?.bloodGroup}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Present Address">
+//             {student?.presentAddress}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Permanent Address">
+//             {student?.permanentAddress}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Guardian">
+//             Father: {student?.guardian?.fatherName} (
+//             {student?.guardian?.fatherOccupation}) -{" "}
+//             {student?.guardian?.fatherContactNo} <br />
+//             Mother: {student?.guardian?.motherName} (
+//             {student?.guardian?.motherOccupation}) -{" "}
+//             {student?.guardian?.motherContactNo}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Local Guardian">
+//             {student?.localGuardian?.name} (
+//             {student?.localGuardian?.occupation}) -{" "}
+//             {student?.localGuardian?.contactNo}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Department">
+//             {student?.academicDepartment?.name}
+//           </Descriptions.Item>
+//           <Descriptions.Item label="Faculty">
+//             {student?.academicFaculty?.name}
+//           </Descriptions.Item>
+//         </Descriptions>
+//       </Card>
+//     </Col>
+//   </Row>
+// </div>
 //   );
 // };
 

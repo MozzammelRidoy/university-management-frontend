@@ -19,7 +19,7 @@ const AdminData = () => {
   const { data: adminData, isFetching } = useGetAllAdminsQuery([
     { name: "limit", value: 3 },
     { name: "page", value: page },
-    { name: "sort", value: "id" },
+    { name: "sort", value: "createdAt" },
     ...params,
   ]);
 

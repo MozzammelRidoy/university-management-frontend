@@ -80,4 +80,5 @@ export type TAdminData = {
   bloogGroup: string;
   presentAddress: string;
   permanentAddress: string;
+  profileImage?: string;
 };
