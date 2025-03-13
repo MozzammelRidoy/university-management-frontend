@@ -100,6 +100,24 @@ export type TFacultyData = {
   emergencyContactNo: string;
   presentAddress: string;
   permanentAddress: string;
-  academicDepartment: string;
+  academicDepartment: TAcademicDepartment;
+  academicFaculty: TAcademicFaculty;
   profileImage?: string;
+};
+
+type TAcademicDepartment = {
+  _id: string;
+  name: string;
+  academicFaculty: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+type TAcademicFaculty = {
+  _id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 };

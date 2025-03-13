@@ -122,7 +122,7 @@ const userManagementApi = baseApi.injectEndpoints({
         return { data: response?.data, meta: response?.meta };
       },
     }),
-    getSingleFaculty: builder.query({
+    getSingleFacultyUser: builder.query({
       query: (facultyId) => {
         return {
           url: `/faculties/${facultyId}`,
@@ -160,7 +160,7 @@ export const {
   useAddAdminMutation,
   useUpdateAdminDetailsMutation,
   useGetAllFacultiesUserQuery,
-  useGetSingleFacultyQuery,
+  useGetSingleFacultyUserQuery,
   useAddFacultyMutation,
   useUpdateFacultyDetailsMutation,
 } = userManagementApi;

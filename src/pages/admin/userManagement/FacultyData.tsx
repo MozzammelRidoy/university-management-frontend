@@ -61,10 +61,10 @@ const FacultyData = () => {
       render: (item) => {
         return (
           <Space>
-            <Link to={`/faculty/faculty-data/${item.key}`}>
+            <Link to={`/admin/faculty-data/${item.key}`}>
               <Button>Details</Button>
             </Link>
-            <Link to={`/faculty/faculty-data-update/${item.key}`}>
+            <Link to={`/admin/faculty-data-update/${item.key}`}>
               <Button>Update</Button>
             </Link>
 
