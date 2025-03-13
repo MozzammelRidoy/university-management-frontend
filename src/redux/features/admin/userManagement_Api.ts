@@ -1,5 +1,4 @@
 import {
-  TAdmin,
   TAdminData,
   TQueryParams,
   TResponseRedux,
