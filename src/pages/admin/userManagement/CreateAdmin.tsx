@@ -8,7 +8,6 @@ import PHInput from "../../../components/form/PHInput";
 import PHSelect from "../../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constant/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
-import { toast } from "sonner";
 
 const adminDefaultValues = {
   designation: "System Administrator",

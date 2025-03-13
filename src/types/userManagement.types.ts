@@ -69,6 +69,7 @@ export type TAdmin = {
 };
 
 export type TAdminData = {
+  _id?: string;
   designation: string;
   name: TName;
   gender: string;
