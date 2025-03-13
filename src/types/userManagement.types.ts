@@ -82,3 +82,23 @@ export type TAdminData = {
   permanentAddress: string;
   profileImage?: string;
 };
+
+export type TFaculty = {
+  password: string;
+  faculty: TFacultyData;
+};
+
+export type TFacultyData = {
+  degisnation: string;
+  name: TName;
+  gender: string;
+  dateOfBirth: string;
+  bloodGroup: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  presentAddress: string;
+  permanentAddress: string;
+  academicDepartment: string;
+  profileImage?: string;
+};
