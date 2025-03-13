@@ -202,7 +202,7 @@ export const createFacultyZodSchema = z.object({
 
   presentAddress: z.string().min(5, "Present address is required"),
   permanentAddress: z.string().min(5, "Permanent address is required"),
-  designation: z.string().min(1, "Admin designation is required"),
+  degisnation: z.string().min(1, "Admin designation is required"),
   academicDepartment: z
     .string({ required_error: "Academic Department is required" })
     .min(1, "Academic department is required"),

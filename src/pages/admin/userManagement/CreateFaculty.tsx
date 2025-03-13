@@ -8,6 +8,7 @@ import PHDatePicker from "../../../components/form/PHDatePicker";
 import { bloodGroupOptions, genderOptions } from "../../../constant/global";
 import { createFacultyZodSchema } from "../../../validationSchema/userManagement_validationZodSchema";
 import { useGetAllDepartmentsQuery } from "../../../redux/features/admin/academicManagement_Api";
+import { useAddFacultyMutation } from "../../../redux/features/admin/userManagement_Api";
 
 const facultyDefaultValues = {
   degisnation: "Professor",
@@ -27,7 +28,7 @@ const facultyDefaultValues = {
   academicDepartment: "678b83d8b665320bc45e7471",
 };
 const CreateFaculty = () => {
-  const [addFaculty, { data, error }] = useAddAdminMutation();
+  const [addFaculty, { data, error }] = useAddFacultyMutation();
   const { data: academicDepData, isLoading: departmentIsLoading } =
     useGetAllDepartmentsQuery(undefined);
   const departmentOptions = academicDepData?.data?.map((item) => ({
@@ -127,7 +128,7 @@ const CreateFaculty = () => {
             </Col>
             <Divider>Designation</Divider>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-              <PHInput name="designation" type="text" label="Designation" />
+              <PHInput name="degisnation" type="text" label="Designation" />
             </Col>
             <Col span={24} md={{ span: 12 }}>
               <PHSelect

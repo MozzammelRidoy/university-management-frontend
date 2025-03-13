@@ -102,7 +102,7 @@ const userManagementApi = baseApi.injectEndpoints({
       }),
     }),
     // for Faculty
-    getAllFaculties: builder.query({
+    getAllFacultiesUser: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
 
@@ -159,7 +159,7 @@ export const {
   useGetSingleAdminQuery,
   useAddAdminMutation,
   useUpdateAdminDetailsMutation,
-  useGetAllFacultiesQuery,
+  useGetAllFacultiesUserQuery,
   useGetSingleFacultyQuery,
   useAddFacultyMutation,
   useUpdateFacultyDetailsMutation,

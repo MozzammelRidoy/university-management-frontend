@@ -89,6 +89,7 @@ export type TFaculty = {
 };
 
 export type TFacultyData = {
+  _id: string;
   degisnation: string;
   name: TName;
   gender: string;
