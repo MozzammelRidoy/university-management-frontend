@@ -1,8 +1,4 @@
-import {
-  TAcademicDepartment,
-  TAcademicFaculty,
-  TAcademicSemester,
-} from "./academicManagement.types";
+import { TAcademicSemester } from "./academicManagement.types";
 
 export type TStudentData = {
   _id: string;
