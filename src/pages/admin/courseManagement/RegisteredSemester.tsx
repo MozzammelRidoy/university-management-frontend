@@ -7,8 +7,12 @@ import {
   Tag,
 } from "antd";
 
-import { useGetAllRegisteredSemestersQuery } from "../../../redux/features/admin/courseManagement_Api";
+import {
+  useGetAllRegisteredSemestersQuery,
+  useUpdateRegisteredSemestersMutation,
+} from "../../../redux/features/admin/courseManagement_Api";
 import moment from "moment";
+import { useState } from "react";
 
 export type TTableData = any;
 
@@ -29,6 +33,8 @@ const items: MenuProps["items"] = [
 
 const RegisteredSemester = () => {
   // const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
+  const [semesterId, setSemesterId] = useState("");
+  const [updateSemesterStatus] = useUpdateRegisteredSemestersMutation();
 
   const { data: semesterData, isFetching } =
     useGetAllRegisteredSemestersQuery(undefined);
@@ -43,12 +49,19 @@ const RegisteredSemester = () => {
     })
   );
 
-  const handleStatusDropdown = (data) => {
-    console.log(data);
+  const handleStatusUpdate = async (data) => {
+    const updateData = {
+      id: semesterId,
+      data: {
+        status: data.key,
+      },
+    };
+    const res = await updateSemesterStatus(updateData);
+    console.log(res);
   };
   const menuProps = {
     items,
-    onClick: handleStatusDropdown,
+    onClick: handleStatusUpdate,
   };
   const columns: TableColumnsType<TTableData> = [
     {
@@ -87,12 +100,11 @@ const RegisteredSemester = () => {
     {
       title: "Action",
       key: "x",
-      dataIndex: "x",
-      render: () => {
+      render: (item) => {
         return (
           <div>
-            <Dropdown menu={menuProps}>
-              <Button>Update</Button>
+            <Dropdown menu={menuProps} trigger={["click"]}>
+              <Button onClick={() => setSemesterId(item.key)}>Update</Button>
             </Dropdown>
           </div>
         );
