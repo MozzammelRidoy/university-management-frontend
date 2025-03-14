@@ -11,6 +11,7 @@ import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
 import OfferedCourses from "../pages/admin/courseManagement/OfferedCourses";
 import RegisteredSemester from "../pages/admin/courseManagement/RegisteredSemester";
 import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
+
 import AdminData from "../pages/admin/userManagement/AdminData";
 import AdminDetails from "../pages/admin/userManagement/AdminDetails";
 import AdminDetailsUpdate from "../pages/admin/userManagement/AdminDetailsUpdate";
