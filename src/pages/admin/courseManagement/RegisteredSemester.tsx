@@ -1,8 +1,31 @@
-import { Button, Table, TableColumnsType } from "antd";
+import {
+  Button,
+  Dropdown,
+  MenuProps,
+  Table,
+  TableColumnsType,
+  Tag,
+} from "antd";
 
 import { useGetAllRegisteredSemestersQuery } from "../../../redux/features/admin/courseManagement_Api";
+import moment from "moment";
 
-export type TTableData = "name" | "year" | "startDate" | "endDate";
+export type TTableData = any;
+
+const items: MenuProps["items"] = [
+  {
+    key: "UPCOMING",
+    label: "Upcoming",
+  },
+  {
+    key: "ONGOING",
+    label: "Ongoing",
+  },
+  {
+    key: "ENDED",
+    label: "Ended",
+  },
+];
 
 const RegisteredSemester = () => {
   // const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
@@ -14,11 +37,19 @@ const RegisteredSemester = () => {
     ({ _id, startDate, academicSemester, endDate, status }) => ({
       key: _id,
       name: `${academicSemester.name} ${academicSemester.year}`,
-      startDate,
-      endDate,
+      startDate: moment(new Date(startDate)).format("MMMM"),
+      endDate: moment(new Date(endDate)).format("MMMM"),
       status,
     })
   );
+
+  const handleStatusDropdown = (data) => {
+    console.log(data);
+  };
+  const menuProps = {
+    items,
+    onClick: handleStatusDropdown,
+  };
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
@@ -29,6 +60,19 @@ const RegisteredSemester = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
+      render: (item) => {
+        let color;
+        if (item === "UPCOMING") {
+          color = "blue";
+        }
+        if (item === "ONGOING") {
+          color = "green";
+        }
+        if (item === "ENDED") {
+          color = "red";
+        }
+        return <Tag color={color}>{item}</Tag>;
+      },
     },
     {
       title: "Start Date",
@@ -47,7 +91,9 @@ const RegisteredSemester = () => {
       render: () => {
         return (
           <div>
-            <Button>Update</Button>
+            <Dropdown menu={menuProps}>
+              <Button>Update</Button>
+            </Dropdown>
           </div>
         );
       },
