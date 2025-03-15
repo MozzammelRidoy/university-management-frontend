@@ -49,7 +49,7 @@ const RegisteredSemester = () => {
     })
   );
 
-  const handleStatusUpdate = async (data) => {
+  const handleStatusUpdate = async (data: any) => {
     const updateData = {
       id: semesterId,
       data: {
