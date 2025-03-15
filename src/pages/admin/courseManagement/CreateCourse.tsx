@@ -4,11 +4,18 @@ import { toast } from "sonner";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
 import PHSelect from "../../../components/form/PHSelect";
-import { useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagement_Api";
+import {
+  useAddCourseMutation,
+  useGetAllCoursesQuery,
+} from "../../../redux/features/admin/courseManagement_Api";
+import { TError } from "../../../types";
 
 const CreateCourse = () => {
-  const { data: coursesData } = useGetAllCoursesQuery(undefined);
-  console.log(coursesData);
+  const { data: coursesData } = useGetAllCoursesQuery([
+    { name: "limit", value: 100 },
+    { name: "sort", value: "-createdAt" },
+  ]);
+  const [createCourse] = useAddCourseMutation();
 
   const preRequisiteCoursesOptions = coursesData?.data?.map((item) => ({
     value: item._id,
@@ -17,23 +24,24 @@ const CreateCourse = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
     const courseData = {
-      cradits: Number(data.credits),
-      code: Number(data.code),
       ...data,
-      preRequisiteCourses: data.preRequisiteCourses.map((item) => ({
-        course: item,
-        isDeleted: false,
-      })),
+      code: Number(data.code),
+      credits: Number(data.credits),
+      preRequisiteCourses: data.perpreRequisiteCourses
+        ? data.preRequisiteCourses?.map((item) => ({
+            course: item,
+            isDeleted: false,
+          }))
+        : [],
     };
-    console.log(courseData);
-    // try {
-    //   const res = await addRegisterSemester(semesterData).unwrap();
-    //   toast.success(res.message, { id: toastId, duration: 1000 });
-    // } catch (err) {
-    //   const errorMessage =
-    //     (err as TError)?.data?.message || "Something went wrong!";
-    //   toast.error(errorMessage, { id: toastId, duration: 1000 });
-    // }
+    try {
+      const res = await createCourse(courseData).unwrap();
+      toast.success(res.message, { id: toastId, duration: 1000 });
+    } catch (err) {
+      const errorMessage =
+        (err as TError)?.data?.message || "Something went wrong!";
+      toast.error(errorMessage, { id: toastId, duration: 1000 });
+    }
   };
 
   return (
