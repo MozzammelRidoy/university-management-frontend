@@ -14,6 +14,7 @@ import {
 import { useGetAllFacultiesUserQuery } from "../../../redux/features/admin/userManagement_Api";
 import PHTimePicker from "../../../components/form/PHTimePicker";
 import PHSelectWithWatch from "../../../components/form/PHSelectWithWatch";
+import { useState } from "react";
 
 const daysOptions = [
   { value: "Sat", label: "Sat" },
@@ -26,6 +27,7 @@ const daysOptions = [
 ];
 
 const OfferCourse = () => {
+  const [id, setId] = useState("");
   const { data: academicSemesterData, isFetching } =
     useGetAllRegisteredSemestersQuery(undefined);
 
@@ -82,6 +84,7 @@ const OfferCourse = () => {
             options={academicDepartmentOptions}
           />
           <PHSelectWithWatch
+            onValueChange={setId}
             name={"course"}
             label={"Course"}
             options={coursesOptions}
@@ -90,6 +93,7 @@ const OfferCourse = () => {
             name={"faculty"}
             label={"Faculty"}
             options={facultyOptions}
+            disabled={!id}
           />
           <PHInput name="maxCapacity" label="Max Capacity" type="text" />
           <PHInput name="section" label="Section" type="text" />

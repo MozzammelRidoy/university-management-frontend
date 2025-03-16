@@ -1,4 +1,5 @@
 import { Form, Select } from "antd";
+import { useEffect } from "react";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 
 type TSelectFormProps = {
@@ -14,13 +15,16 @@ const PHSelectWithWatch = ({
   disabled = false,
   options,
   mode,
+  onValueChange,
 }: TSelectFormProps) => {
   const { control } = useFormContext();
   const inputValue = useWatch({
     control,
     name,
   });
-  console.log(inputValue);
+  useEffect(() => {
+    onValueChange(inputValue);
+  }, [inputValue, onValueChange]);
   return (
     <Controller
       name={name}
