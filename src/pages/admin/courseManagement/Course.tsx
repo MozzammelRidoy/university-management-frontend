@@ -1,6 +1,9 @@
 import { Button, MenuProps, Modal, Table, TableColumnsType } from "antd";
 
-import { useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagement_Api";
+import {
+  useAddFacultiesMutation,
+  useGetAllCoursesQuery,
+} from "../../../redux/features/admin/courseManagement_Api";
 import { useState } from "react";
 import { useGetAllFacultiesUserQuery } from "../../../redux/features/admin/userManagement_Api";
 import PHForm from "../../../components/form/PHForm";
@@ -60,7 +63,7 @@ const Course = () => {
       title: "Action",
       key: "x",
       render: (item) => {
-        return <AddFacultyModal data={item} />;
+        return <AddFacultyModal facultyInfo={item} />;
       },
     },
   ];
@@ -98,9 +101,10 @@ const Course = () => {
   );
 };
 
-const AddFacultyModal = ({ data }) => {
-  console.log(data);
+const AddFacultyModal = ({ facultyInfo }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addFaculties] = useAddFacultiesMutation();
+
   const { data: facultiesData } = useGetAllFacultiesUserQuery([
     { name: "limit", value: 100 },
     { name: "sort", value: "-createdAt" },
@@ -113,6 +117,11 @@ const AddFacultyModal = ({ data }) => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+    const facultyData = {
+      courseId: facultyInfo.key,
+      data,
+    };
+    addFaculties(facultyData);
   };
   const showModal = () => {
     setIsModalOpen(true);
@@ -134,6 +143,7 @@ const AddFacultyModal = ({ data }) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <PHForm onSubmit={onSubmit}>
           <PHSelect
@@ -148,5 +158,4 @@ const AddFacultyModal = ({ data }) => {
     </>
   );
 };
-
 export default Course;
