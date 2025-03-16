@@ -13,6 +13,7 @@ import {
 } from "../../../redux/features/admin/academicManagement_Api";
 import { useGetAllFacultiesUserQuery } from "../../../redux/features/admin/userManagement_Api";
 import PHTimePicker from "../../../components/form/PHTimePicker";
+import PHSelectWithWatch from "../../../components/form/PHSelectWithWatch";
 
 const daysOptions = [
   { value: "Sat", label: "Sat" },
@@ -80,7 +81,11 @@ const OfferCourse = () => {
             label={"Academic Department"}
             options={academicDepartmentOptions}
           />
-          <PHSelect name={"course"} label={"Course"} options={coursesOptions} />
+          <PHSelectWithWatch
+            name={"course"}
+            label={"Course"}
+            options={coursesOptions}
+          />
           <PHSelect
             name={"faculty"}
             label={"Faculty"}
