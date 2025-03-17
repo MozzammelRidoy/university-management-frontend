@@ -37,6 +37,14 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     });
     return result;
   }
+  if (result?.error?.status === 403) {
+    const errorMessage =
+      (result?.error as TError)?.data?.message || "Something went wrong!";
+    toast.error(errorMessage, {
+      duration: 1000,
+    });
+    return result;
+  }
   if (result?.error?.status === 401) {
     const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
       method: "POST",

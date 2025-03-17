@@ -22,9 +22,13 @@ const Login = () => {
   // });
 
   const defaultValues = {
-    id: "A-0001",
-    password: "admin123",
+    id: "2025010001",
+    password: "student123",
   };
+  // const defaultValues = {
+  //   id: "A-0001",
+  //   password: "admin123",
+  // };
   const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
@@ -38,8 +42,14 @@ const Login = () => {
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user, token: res.data.accessToken }));
-      navigate(`/${user.role}/dashboard`);
+
       toast.success("Logged in successfully!", { id: toastId, duration: 1000 });
+
+      if (res.data.needPasswordChange) {
+        navigate(`/change-password`);
+      } else {
+        navigate(`/${user.role}/dashboard`);
+      }
     } catch (err) {
       toast.error("Something went wrong!", { id: toastId, duration: 1000 });
     }

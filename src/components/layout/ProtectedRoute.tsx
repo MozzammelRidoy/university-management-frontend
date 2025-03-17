@@ -12,9 +12,9 @@ import { verifyToken } from "../../utils/verifyToken";
 type TProtectedRoute = { children: ReactNode; role: string | undefined };
 
 const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
-  const token = useAppSelector(selectCurrentToken);
   // const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
+  const token = useAppSelector(selectCurrentToken);
 
   let user;
   if (token) {
