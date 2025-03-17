@@ -1,11 +1,11 @@
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
-import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
 import {
   useGetAllCoursesQuery,
   useGetAllRegisteredSemestersQuery,
+  useGetCourseFacultiesQuery,
 } from "../../../redux/features/admin/courseManagement_Api";
 import {
   useGetAllDepartmentsQuery,
@@ -28,7 +28,7 @@ const daysOptions = [
 
 const OfferCourse = () => {
   const [id, setId] = useState("");
-  const { data: academicSemesterData, isFetching } =
+  const { data: academicSemesterData } =
     useGetAllRegisteredSemestersQuery(undefined);
 
   const academicSemestersOptions = academicSemesterData?.data?.map((item) => ({
@@ -54,8 +54,10 @@ const OfferCourse = () => {
     value: item._id,
     label: `${item.title}`,
   }));
-  const { data: facultyData } = useGetAllFacultiesUserQuery(undefined);
-  const facultyOptions = facultyData?.data?.map((item) => ({
+  const { data: facultyData } = useGetCourseFacultiesQuery(id, {
+    skip: !id,
+  });
+  const facultyOptions = facultyData?.data?.faculties?.map((item) => ({
     value: item._id,
     label: `${item.name.firstName} ${item.name.middleName} ${item.name.lastName}`,
   }));
