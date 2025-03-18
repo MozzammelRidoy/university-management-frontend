@@ -3,6 +3,7 @@ import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
 import PHInput from "../../../components/form/PHInput";
 import {
+  useAddOfferCourseMutation,
   useGetAllCoursesQuery,
   useGetAllRegisteredSemestersQuery,
   useGetCourseFacultiesQuery,
@@ -15,6 +16,8 @@ import { useGetAllFacultiesUserQuery } from "../../../redux/features/admin/userM
 import PHTimePicker from "../../../components/form/PHTimePicker";
 import PHSelectWithWatch from "../../../components/form/PHSelectWithWatch";
 import { useState } from "react";
+import moment from "moment";
+import { toast } from "sonner";
 
 const daysOptions = [
   { value: "Sat", label: "Sat" },
@@ -30,6 +33,8 @@ const OfferCourse = () => {
   const [id, setId] = useState("");
   const { data: academicSemesterData } =
     useGetAllRegisteredSemestersQuery(undefined);
+
+  const [addOfferCourse] = useAddOfferCourseMutation();
 
   const academicSemestersOptions = academicSemesterData?.data?.map((item) => ({
     value: item._id,
@@ -62,8 +67,28 @@ const OfferCourse = () => {
     label: `${item.name.firstName} ${item.name.middleName} ${item.name.lastName}`,
   }));
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const toastId = toast.loading("Creating...");
+    const offeredCourseData = {
+      ...data,
+      maxCapacity: Number(data.maxCapacity),
+      section: Number(data.section),
+      startTime: data.startTime.format("HH:mm"),
+      endTime: data.endTime.format("HH:mm"),
+    };
+    const res = await addOfferCourse(offeredCourseData);
+    if (res?.data?.success) {
+      toast.success(res?.data?.message || "Created Success", {
+        id: toastId,
+        duration: 1000,
+      });
+    } else {
+      toast.error(res?.error?.data?.message || "Creating failed!", {
+        id: toastId,
+        duration: 1000,
+      });
+    }
+    toast.dismiss();
   };
 
   return (

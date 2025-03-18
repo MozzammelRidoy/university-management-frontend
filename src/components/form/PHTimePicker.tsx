@@ -8,7 +8,12 @@ const PHTimePicker = ({ name, label }) => {
         name={name}
         render={({ field, fieldState: { error } }) => (
           <Form.Item label={label}>
-            <TimePicker {...field} size="large" style={{ width: "100%" }} />
+            <TimePicker
+              {...field}
+              size="large"
+              format={"HH:mm"}
+              style={{ width: "100%" }}
+            />
             {error && <small style={{ color: "red" }}>{error.message}</small>}
           </Form.Item>
         )}
