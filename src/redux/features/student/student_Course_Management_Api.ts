@@ -1,11 +1,12 @@
 import { TQueryParams, TResponseRedux } from "../../../types";
+import { TOfferedCourse } from "../../../types/studentCourse.type";
 import { baseApi } from "../../api/baseApi";
 
 const studentCourseAPI = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // acadmic semesters
-    getMyAllOfferedCourses: builder.query({
+    getAllOfferedCourses: builder.query({
       query: (args) => {
+        console.log(args);
         const params = new URLSearchParams();
 
         if (args) {
@@ -16,12 +17,15 @@ const studentCourseAPI = baseApi.injectEndpoints({
         return {
           url: "/offered-courses/my-offered-courses",
           method: "GET",
-          params,
+          params: params,
         };
       },
-      providesTags: ["courses"],
-      transformResponse: (response: TResponseRedux<any>) => {
-        return { data: response?.data, meta: response?.meta };
+      providesTags: ["offeredCourse"],
+      transformResponse: (response: TResponseRedux<TOfferedCourse[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
       },
     }),
 
@@ -31,9 +35,9 @@ const studentCourseAPI = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["courses"],
+      invalidatesTags: ["offeredCourse"],
     }),
   }),
 });
 
-export const {} = studentCourseAPI;
+export const { useGetAllOfferedCoursesQuery } = studentCourseAPI;
