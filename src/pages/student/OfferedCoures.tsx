@@ -77,5 +77,4 @@ const OfferedCoures = () => {
     </Row>
   );
 };
-
 export default OfferedCoures;
